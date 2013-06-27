@@ -20,6 +20,7 @@ h1 {
 	background-image: none;
 }
 #puzzle {
+	cursor: pointer;
 	width: 508px;
 	padding: 0;
 	margin: auto;
