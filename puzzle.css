@@ -14,10 +14,9 @@ h1 {
 	float: left;
 	border: 1px solid rgba(255, 255, 255, 0.5);
 	margin: -1px 0 0 -1px;
-	background-image: url('IMG_0335.JPG');
 }
 .tile.blank {
-	background-image: none;
+	background-image: none !important;
 }
 #puzzle {
 	cursor: pointer;

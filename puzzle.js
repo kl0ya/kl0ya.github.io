@@ -6,7 +6,8 @@ var Board = function($) {
 		return 't_' + x + '_' + y;
 	};
 
-	var build = function() {
+	var build = function(imageUrl) {
+        imageUrl = "url(" + imageUrl + ")";
 		for(var i = 0; i < 16; ++i) {
 			var x = Math.floor(i/4);
 			var y = i%4;
@@ -15,6 +16,7 @@ var Board = function($) {
 				.attr('id', id(x, y))
 				.data('x', x)
 				.data('y', y)
+				.css('background-image', imageUrl)
 				.appendTo('#puzzle');
 			update(tile, i);
 		};
@@ -27,8 +29,10 @@ var Board = function($) {
 		var y = num%4;
 		tile
 			.toggleClass('blank', num == BLANK)
-			.css('background-position-x', '-' + y * 125 + 'px')
-			.css('background-position-y', '-' + x * 125 + 'px');
+			.css('background-position', 
+					'-' + y * 125 + 'px'
+					+ ' '
+					+ '-' + x * 125 + 'px');
 	};
 
 	var slide = function(dx, dy) {
@@ -73,10 +77,19 @@ var Board = function($) {
 		}
 	};
 
-	var init = function() {
-		build();
+	var start = function() {
 		setupHandler();
 		window.setTimeout(shuffle, 2000);
+	}
+
+	var init = function() {
+        imageUrl = $('#puzzle').data('img');
+		build(imageUrl);
+		$('<img>')
+			.attr('src', imageUrl)
+			.hide()
+			.load(start)
+			.appendTo('body');
 	};
 	return {
 		init: init
